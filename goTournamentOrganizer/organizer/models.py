@@ -1,4 +1,6 @@
+
 from django.db import models
+
 
 # Create your models here.
 
@@ -10,6 +12,9 @@ class RuleSet(models.Model):
     komi = models.FloatField()
     handicap = models.CharField(max_length=1000)
 
+    def __str__(self):
+        return self.rule_set
+
 
 class Participants(models.Model):
     name = models.CharField(max_length=100)
@@ -20,6 +25,10 @@ class Participants(models.Model):
     dob = models.DateTimeField('Date of Birth')
     age = models.SmallIntegerField()
 
+    def __str__(self):
+        full_name = str(self.name) + str(self.surname)
+        return full_name
+
 
 class Games(models.Model):
     tournament = models.ForeignKey('Tournament', related_name="game_tournament", on_delete=models.CASCADE)
@@ -27,6 +36,10 @@ class Games(models.Model):
     white_player = models.ForeignKey(Participants, related_name="white_player", on_delete=models.CASCADE)
     black_player = models.ForeignKey(Participants, related_name="black_player", on_delete=models.CASCADE)
     result = models.CharField(max_length=100)
+
+    def __str__(self):
+        played_games = str(self.board_size) + "x" + str(self.board_size) + " w: " + str(self.white_player) + " vs. b: " + str(self.black_player) + " " + str(self.result)
+        return played_games
 
 
 class Tournament(models.Model):
@@ -38,3 +51,6 @@ class Tournament(models.Model):
     players = models.ForeignKey(Participants, on_delete=models.CASCADE)
     games = models.ForeignKey(Games, related_name="tournament_game", on_delete=models.CASCADE)
     result = models.FileField()
+
+    def __str__(self):
+        return self.name
