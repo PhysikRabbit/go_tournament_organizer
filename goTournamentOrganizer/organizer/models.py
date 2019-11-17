@@ -7,7 +7,7 @@ from django.db import models
 
 class RuleSet(models.Model):
     rule_set = models.CharField(max_length=500)
-    allowed_board_sizes = models.PositiveSmallIntegerField()
+    allowed_board_sizes = models.PositiveSmallIntegerField() # TODO: change to a field which can take multiple values
     time_model = models.CharField(max_length=1000)
     komi = models.FloatField()
     handicap = models.CharField(max_length=1000)
@@ -22,11 +22,11 @@ class Participants(models.Model):
     strength = models.CharField(max_length=10)
     city = models.CharField(max_length=100)
     club = models.CharField(max_length=100)
-    dob = models.DateTimeField('Date of Birth')
+    dob = models.DateField('Date of Birth')
     age = models.SmallIntegerField()
 
     def __str__(self):
-        full_name = str(self.name) + str(self.surname)
+        full_name = str(self.name) + " " + str(self.surname)
         return full_name
 
 
@@ -42,6 +42,8 @@ class Games(models.Model):
         return played_games
 
 
+# TODO: Tournament is currently referencing only one participant and only one game. Which is of course nonsense.
+# TODO: Rather one tournament should refer to a whole list/table of participants, as well as a whole list/table of games
 class Tournament(models.Model):
     name = models.CharField(max_length=500)
     rule_set = models.ForeignKey(RuleSet, on_delete=models.CASCADE)

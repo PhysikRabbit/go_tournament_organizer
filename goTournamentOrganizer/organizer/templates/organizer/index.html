@@ -1,0 +1,9 @@
+{% if participants_list %}
+    <ul>
+    {% for participant in participants_list %}
+        <li><a href="/organizer/{{ participant.id }}/">{{ participant.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No participant are available.</p>
+{% endif %}
