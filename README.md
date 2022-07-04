@@ -17,7 +17,8 @@ Username and password need to be inserted in the [settings.py](/go_tournament_or
 Make sure, to not push any password into VCS!
 
 ### Python virtual environment
-To create a virtual environment for this project run following commands
+To create a virtual environment for this project run following commands.
+
 On Windows:
 
 Create virtual environment
@@ -40,9 +41,10 @@ Deactivate environment
 deactivate
 ```
 
-To check, if the environment is activated, start the python console and run this:
+You should see the name of your virtual environment now in your console prompt.
+To check for sure, if the environment is activated, start the python console and run this:
 
-```
+```python
 import sys
 
 def get_base_prefix_compat():
@@ -53,4 +55,11 @@ def in_virtualenv():
     return get_base_prefix_compat() != sys.prefix
 
 in_virtualenv()
+```
+
+### Django
+
+In your activated virtual environment run
+```
+python -m pip install Django
 ```
