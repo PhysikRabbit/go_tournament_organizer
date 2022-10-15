@@ -63,3 +63,37 @@ In your activated virtual environment run
 ```
 python -m pip install Django
 ```
+
+## Running the program
+After meeting the prerequisites as above in installation, you can start the program as follows.
+Make sure, that the PostgreSQL-Server is running.
+```
+python .\go_tournament_organizer\manage.py runserver
+```
+
+If you set up the project for the first time, you have to run the migrations for the database.
+```
+python .\go_tournament_organizer\manage.py migrate
+```
+
+## Development
+
+### Users
+#### Admins
+To create an admin-Account use following commands
+```
+python .\go_tournament_organizer\manage.py createsuperuser
+```
+Insert username, email and password as prompted.
+
+
+### Data Models
+If you create or alter models, you have to run 
+```
+python manage.py makemigrations
+```
+before applying the migrations with
+```
+python manage.py migrate
+```
+
